@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        button { padding: 10px; margin: 10px 0; cursor: pointer; }
+        pre { background-color: #ebebeb; padding: 10px; border-radius: 5px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>Test API de Gestión Deportiva</h1>
+    
+    <button onclick="testLocalAPI('http://localhost:9090/')">Probar localhost:9090</button>
+    <button onclick="testLocalAPI('http://localhost:9090/api/teams')">Probar localhost:9090/api/teams</button>
+    <button onclick="testLocalAPI('http://localhost:9090/api/players')">Probar localhost:9090/api/players</button>
+  
+    
+    <h2>Resultado:</h2>
+    <pre id="result">Haz clic en un botón para probar la API...</pre>
+
+    <script>
+        async function testLocalAPI(url) {
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = `Probando ${url}...`;
+            
+            try {
+                const startTime = new Date();
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                const endTime = new Date();
+                const timeElapsed = endTime - startTime;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultElement.textContent = `Conexión exitosa (${timeElapsed}ms):\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultElement.textContent = `Error ${response.status}: ${response.statusText}\nTiempo: ${timeElapsed}ms`;
+                }
+            } catch (error) {
+                resultElement.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html> 

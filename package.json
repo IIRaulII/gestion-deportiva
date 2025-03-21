@@ -1,0 +1,34 @@
+{
+  "name": "gestion-deportiva",
+  "version": "1.0.0",
+  "description": "API REST para gestión deportiva de equipos y jugadores",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "data:import": "node src/utils/seeder.js",
+    "data:destroy": "node src/utils/seeder.js -d"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "api",
+    "rest",
+    "deportes",
+    "equipos",
+    "jugadores"
+  ],
+  "author": "Raúl Montoya",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+} 
